@@ -70,7 +70,7 @@ ZSH_THEME="zhiyuanw-light"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-autosuggestions fasd git)
 source $ZSH/oh-my-zsh.sh
-
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -102,6 +102,10 @@ alias mv="mv -i"
 alias df="df -h"
 alias la="ls -A"
 alias ll="ls -lh"
+alias mc="make clean"
+alias cdb="cd .."
+alias vmstart="VBoxManage startvm \"Ubuntu Server 20.04 LTS\" --type headless"
+alias vmclose="VBoxManage controlvm \"Ubuntu Server 20.04 LTS\" poweroff"
 # proxy list
 alias proxy='export all_proxy=socks5://127.0.0.1:1086'
 alias unproxy='unset all_proxy'
@@ -122,3 +126,5 @@ alias txyun='ssh zhiyuanw@154.8.237.52'
 alias blog="bundle exec jekyll serve"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+bindkey -v
