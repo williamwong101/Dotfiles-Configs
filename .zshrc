@@ -1,4 +1,5 @@
 # If you come from bash you might have to change your $PATH.
+export PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
@@ -42,7 +43,7 @@ ZSH_THEME="zhiyuanw-light"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -69,6 +70,7 @@ ZSH_THEME="zhiyuanw-light"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(zsh-autosuggestions fasd git)
+eval "$(fasd --init auto)"
 source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # User configuration
@@ -76,7 +78,7 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # export MANPATH="/usr/local/man:$MANPATH"
 setopt HIST_IGNORE_SPACE
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -94,21 +96,24 @@ setopt HIST_IGNORE_SPACE
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias rm="rm -i"
 alias gs="git status"
 alias gc="git commit"
 alias mv="mv -i"
 alias df="df -h"
 alias la="ls -A"
 alias ll="ls -lh"
+alias lla="ls -lha"
 alias mc="make clean"
 alias cdb="cd .."
 alias vmstart="VBoxManage startvm \"Ubuntu Server 20.04 LTS\" --type headless"
 alias vmclose="VBoxManage controlvm \"Ubuntu Server 20.04 LTS\" poweroff"
+
 # proxy list
-alias proxy='export all_proxy=socks5://127.0.0.1:1086'
-alias unproxy='unset all_proxy'
+alias proxy='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890'
+alias unproxy='unset all_proxy https_proxy http_proxy'
 
 # chrome
 alias chrome="open -a 'Google Chrome'"
@@ -116,15 +121,39 @@ alias chrome="open -a 'Google Chrome'"
 # unset auto cd
 unsetopt auto_cd
 
-# my server
-# caen
-alias caen='ssh zhiyuanw@login-course.engin.umich.edu'
-# Tencet server
-alias txyun='ssh zhiyuanw@154.8.237.52'
-
 # blog
 alias blog="bundle exec jekyll serve"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 bindkey -v
+
+# PATH management
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
+
+
+# python env
+source ~/.pyvenv
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/zhiyuanw/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/zhiyuanw/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+
+    else
+        export PATH="/Users/zhiyuanw/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+## man / help
+unalias run-help 2>/dev/null
+autoload run-help
+HELPDIR=/usr/share/zsh/5.8/help
+alias help="run-help"

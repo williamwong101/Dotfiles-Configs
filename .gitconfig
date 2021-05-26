@@ -8,3 +8,17 @@
 [alias]
 	graph = log --all --graph --decorate --oneline
 	
+[core]
+	excludesfile = /Users/zhiyuanw/.gitignore_global
+	autocrlf = input
+[pull]
+	rebase = true
+[http "https://git.code.oa.com"]
+      proxy = http://127.0.0.1:12639
+[http "http://git.code.oa.com"]
+      proxy = http://127.0.0.1:12639
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
