@@ -91,36 +91,5 @@ inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
 inoremap jj <ESC>
-set runtimepath^=~/.vim/pack/vendor/start/ctrlp.vim
-execute pathogen#infect()
-
-" Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
-
-" Declare the list of plugins.
-Plug 'preservim/NERDTree'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'dense-analysis/ale'
-Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/syntastic'
-Plug 'valloric/youcompleteme'
-
-" List ends here. Plugins become visible to Vim after this call.
-call plug#end()
-
-" map keys for plugins "
-map ; :Files
-map <C-o> :NERDTreeToggle<CR>
-
-" for syntastic plugin"
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
 
 set clipboard=unnamed
